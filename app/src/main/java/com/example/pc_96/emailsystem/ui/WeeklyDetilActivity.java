@@ -58,7 +58,6 @@ public class WeeklyDetilActivity extends AppCompatActivity implements WeeklyDeti
     @Override
     public void onServerResponse (String content) {
         //具体调用放到WeeklyDetilPresenter中,现在可以用于显示html格式的字符,代码块的显示还需要处理
-        //通过Jsoup等框架爬取的信息为html格式
         RichText.initCacheDir(this);
         RichText.fromHtml(content).bind(this)
                 .into(mTextView);
