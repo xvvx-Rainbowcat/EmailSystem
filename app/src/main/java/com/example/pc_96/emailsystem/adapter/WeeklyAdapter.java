@@ -9,27 +9,31 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.pc_96.emailsystem.R;
-import com.example.pc_96.emailsystem.data.WeeklyMessage;
+import com.example.pc_96.emailsystem.data.WeeklyBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHolder> {
 
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<WeeklyMessage> mData;
+    private ArrayList<WeeklyBean> mData;
     private int mLayoutId;
     private OnItemClickListener mItemClickListener;
 
-    public WeeklyAdapter(Context context, int layoutId, List<WeeklyMessage> data, OnItemClickListener clickListener) {
+    public WeeklyAdapter(Context context, int layoutId, ArrayList<WeeklyBean> data, OnItemClickListener clickListener) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mData = data;
         mLayoutId = layoutId;
         mItemClickListener = clickListener;
     }
+
+    public void onDataChange(ArrayList<WeeklyBean> mData){
+        this.mData = mData;
+    }   //当网络请求返回时用于修改列表
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -50,7 +54,7 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
                 mItemClickListener.onItemClick(i);
             }
         });
-        // weeklyHolder.onBindView(weeklyHolder, mData.get(i), mContext);
+        weeklyHolder.onBindView(weeklyHolder, mData.get(i), mContext);
     }
 
     @Override
@@ -58,26 +62,33 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
         return mData.size();
     }
 
-    public static class WeeklyHolder extends RecyclerView.ViewHolder {
+
+    public static class WeeklyHolder extends RecyclerView.ViewHolder {  //新增Title,CommentCount
 
         public ImageView mUserAvatar;
+        public TextView mTitle;
         public TextView mUserName;
         public TextView mTime;
         public TextView mViewingCount;
+        public TextView mCommentCount;
 
         public WeeklyHolder(View itemView) {
             super(itemView);
             mUserAvatar = itemView.findViewById(R.id.avater);
+            mTitle = itemView.findViewById(R.id.title);
             mUserName = itemView.findViewById(R.id.name);
             mTime = itemView.findViewById(R.id.time);
             mViewingCount = itemView.findViewById(R.id.viewing_count);
+            mCommentCount = itemView.findViewById(R.id.comment_count);
         }
 
-        public void onBindView(WeeklyHolder holder, WeeklyMessage data, Context context) {
-            Glide.with(context).load(data.avatar).into(holder.mUserAvatar);
-            holder.mUserName.setText(data.name);
-            holder.mTime.setText(data.time);
-            holder.mViewingCount.setText(String.valueOf(data.viewingCount));
+        public void onBindView(WeeklyHolder holder, WeeklyBean data, Context context) {
+//            Glide.with(context).load(data.mAvatarUrl).into(holder.mUserAvatar);
+            holder.mTitle.setText(data.mTitle);
+            holder.mUserName.setText(data.mUserName);
+            holder.mTime.setText(data.mTime);
+            holder.mViewingCount.setText(data.mViewerCount+"");
+            holder.mCommentCount.setText(data.mCommentCount+"");
         }
 
     }

@@ -15,16 +15,18 @@ import android.view.MenuItem;
 
 import com.example.pc_96.emailsystem.R;
 import com.example.pc_96.emailsystem.adapter.WeeklyPagerAdapter;
-import com.example.pc_96.emailsystem.presenter.constract.WeeklyConstract;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, WeeklyConstract.View {
+        implements NavigationView.OnNavigationItemSelectedListener {
+    public static final int TYPE_ANDROID = 0;
+    public static final int TYPE_IOS = 1;
+    public static final int TYPE_SERVICE = 2;
+    public static final int TYPE_WEB = 3;
 
     private DrawerLayout mDrawerLayout;
-    private WeeklyConstract.Presenter mPresenter;
     private ViewPager mPager;
 
     @Override
@@ -52,8 +54,10 @@ public class WeeklyActivity extends AppCompatActivity
 
         mPager = findViewById(R.id.weekly_viewpager);
         List<Fragment> fragmentList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            fragmentList.add(new PagerItemFragment());
+        for (int i = TYPE_ANDROID; i <= TYPE_WEB; i++) {
+            PagerItemFragment tempFragment = new PagerItemFragment();
+            fragmentList.add(tempFragment);
+            tempFragment.bindType(i);   //创建碎片后绑定类别
         }
         WeeklyPagerAdapter adapter = new WeeklyPagerAdapter(getSupportFragmentManager(), fragmentList);
         mPager.setAdapter(adapter);
@@ -65,16 +69,16 @@ public class WeeklyActivity extends AppCompatActivity
             @Override
             public void onPageSelected(int i) {
                 switch (i) {
-                    case 0:
+                    case TYPE_ANDROID:
                         actionBar.setTitle("android");
                         break;
-                    case 1:
+                    case TYPE_IOS:
                         actionBar.setTitle("ios");
                         break;
-                    case 2:
+                    case TYPE_SERVICE:
                         actionBar.setTitle("service");
                         break;
-                    case 3:
+                    case TYPE_WEB:
                         actionBar.setTitle("web");
                         break;
                     default:
@@ -119,8 +123,4 @@ public class WeeklyActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void setPresenter(WeeklyConstract.Presenter presenter) {
-        mPresenter = presenter;
-    }
 }
