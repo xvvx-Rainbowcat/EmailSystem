@@ -4,11 +4,11 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.example.pc_96.emailsystem.data.WeeklyBean;
-import com.example.pc_96.emailsystem.util.WeeklyView;
+import com.example.pc_96.emailsystem.presenter.constract.WeeklyConstract;
 
 import java.util.ArrayList;
 
-public class WeeklyItemPresenter {  //修改PagerItemFragment为MVP模式,新增WeeklyItemPresenter
+public class WeeklyItemPresenter implements WeeklyConstract.Presenter{  //修改PagerItemFragment为MVP模式,新增WeeklyItemPresenter
     public static final int RESPONSE_OK = 0;
     public static final int RESPONSE_FAIL = 1;
     public static final int TYPE_ANDROID = 0;
@@ -18,7 +18,7 @@ public class WeeklyItemPresenter {  //修改PagerItemFragment为MVP模式,新增
 
     private int mType;
     private ArrayList<WeeklyBean> mWeeklyBeanList;
-    private WeeklyView mView;
+    private WeeklyConstract.View mView;
     private Handler dataHandle = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage (Message message) {
@@ -34,7 +34,7 @@ public class WeeklyItemPresenter {  //修改PagerItemFragment为MVP模式,新增
         }
     });
 
-    public WeeklyItemPresenter (WeeklyView mView, int mType){
+    public WeeklyItemPresenter (WeeklyConstract.View mView, int mType){
         this.mView = mView;
         this.mType = mType;
         mWeeklyBeanList = new ArrayList<>();

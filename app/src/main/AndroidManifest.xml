@@ -28,7 +28,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ui.WeeklyDetilActivity"></activity>
+        <activity android:name=".ui.WeeklyDetilActivity" />
+        <activity android:name=".ui.UserDetilActivity"></activity>
     </application>
 
 </manifest>

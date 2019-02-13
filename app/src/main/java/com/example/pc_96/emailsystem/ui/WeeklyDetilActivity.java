@@ -11,13 +11,13 @@ import com.example.pc_96.emailsystem.R;
 import com.example.pc_96.emailsystem.adapter.CommentAdapter;
 import com.example.pc_96.emailsystem.data.Comment;
 import com.example.pc_96.emailsystem.presenter.WeeklyDetilPresenter;
-import com.example.pc_96.emailsystem.util.WeeklyDetilView;
+import com.example.pc_96.emailsystem.presenter.constract.WeeklyDetilConstract;
 import com.zzhoujay.richtext.RichText;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeeklyDetilActivity extends AppCompatActivity implements WeeklyDetilView {
+public class WeeklyDetilActivity extends AppCompatActivity implements WeeklyDetilConstract.View {
 
     private WeeklyDetilPresenter mPresenter;
     private RecyclerView mCommentRecyclerView;

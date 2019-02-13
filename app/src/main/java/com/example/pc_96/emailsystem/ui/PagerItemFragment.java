@@ -15,11 +15,11 @@ import com.example.pc_96.emailsystem.R;
 import com.example.pc_96.emailsystem.adapter.WeeklyAdapter;
 import com.example.pc_96.emailsystem.data.WeeklyBean;
 import com.example.pc_96.emailsystem.presenter.WeeklyItemPresenter;
-import com.example.pc_96.emailsystem.util.WeeklyView;
+import com.example.pc_96.emailsystem.presenter.constract.WeeklyConstract;
 
 import java.util.ArrayList;
 
-public class PagerItemFragment extends Fragment implements WeeklyView {
+public class PagerItemFragment extends Fragment implements WeeklyConstract.View {
 
     private WeeklyItemPresenter mPresenter;
     private ArrayList<WeeklyBean> mWeeklyBeanList = new ArrayList<>();
