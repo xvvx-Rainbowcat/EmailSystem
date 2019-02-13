@@ -41,6 +41,7 @@ public class WeeklyItemPresenter implements WeeklyConstract.Presenter{  //修改
     }
 
 
+    @Override
     public void getServerResponse() {   //网络请求多线程,之后如果有需要可以改成rxJava
         new Thread(new Runnable() {
             @Override
