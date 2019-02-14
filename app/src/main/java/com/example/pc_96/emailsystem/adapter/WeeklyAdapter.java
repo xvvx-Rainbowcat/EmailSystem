@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.pc_96.emailsystem.R;
 import com.example.pc_96.emailsystem.data.WeeklyBean;
 
@@ -23,7 +25,7 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
     private int mLayoutId;
     private OnItemClickListener mItemClickListener;
 
-    public WeeklyAdapter(Context context, int layoutId, ArrayList<WeeklyBean> data, OnItemClickListener clickListener) {
+    public WeeklyAdapter (Context context, int layoutId, ArrayList<WeeklyBean> data, OnItemClickListener clickListener) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mData = data;
@@ -31,25 +33,25 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
         mItemClickListener = clickListener;
     }
 
-    public void onDataChange(ArrayList<WeeklyBean> mData){
-        this.mData = mData;
+    public void onDataChange (ArrayList<WeeklyBean> Data) {
+        this.mData = Data;
     }   //当网络请求返回时用于修改列表
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick (int position);
     }
 
     @NonNull
     @Override
-    public WeeklyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public WeeklyHolder onCreateViewHolder (@NonNull ViewGroup viewGroup, int i) {
         View view = mInflater.inflate(mLayoutId, viewGroup, false);
         return new WeeklyHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WeeklyHolder weeklyHolder, int i) {
+    public void onBindViewHolder (@NonNull WeeklyHolder weeklyHolder, int i) {
         weeklyHolder.itemView.setTag(i);
-        weeklyHolder.itemView.setOnClickListener((view)->{
+        weeklyHolder.itemView.setOnClickListener((view) -> {
             if (mItemClickListener != null) {
                 mItemClickListener.onItemClick(i);
             }
@@ -58,7 +60,7 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount () {
         return mData.size();
     }
 
@@ -72,7 +74,7 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
         public TextView mViewingCount;
         public TextView mCommentCount;
 
-        public WeeklyHolder(View itemView) {
+        public WeeklyHolder (View itemView) {
             super(itemView);
             mUserAvatar = itemView.findViewById(R.id.avater);
             mTitle = itemView.findViewById(R.id.title);
@@ -82,13 +84,18 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.WeeklyHold
             mCommentCount = itemView.findViewById(R.id.comment_count);
         }
 
-        public void onBindView(WeeklyHolder holder, WeeklyBean data, Context context) {
-//            Glide.with(context).load(data.mAvatarUrl).into(holder.mUserAvatar);
+        public void onBindView (WeeklyHolder holder, WeeklyBean data, Context context) {
+            if (data.mAvatarUrl != null) {
+//                Glide.with(context).load("html://pic.cnblogs.com/face/999921/20160728114510.png")
+//                        .apply(RequestOptions.centerCropTransform())
+//                        .into(holder.mUserAvatar);
+                //2.14 3:11 网络加载图片有点问题,暂且搁置
+            }
             holder.mTitle.setText(data.mTitle);
             holder.mUserName.setText(data.mUserName);
             holder.mTime.setText(data.mTime);
-            holder.mViewingCount.setText(data.mViewerCount+"");
-            holder.mCommentCount.setText(data.mCommentCount+"");
+            holder.mViewingCount.setText(data.mViewerCount);
+            holder.mCommentCount.setText(data.mCommentCount);
         }
 
     }
