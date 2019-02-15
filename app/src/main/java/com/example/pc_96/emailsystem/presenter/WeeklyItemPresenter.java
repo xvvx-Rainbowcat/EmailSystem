@@ -6,12 +6,6 @@ import android.os.Message;
 import com.example.pc_96.emailsystem.data.WeeklyBean;
 import com.example.pc_96.emailsystem.presenter.constract.WeeklyConstract;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class WeeklyItemPresenter implements WeeklyConstract.Presenter{  //修改PagerItemFragment为MVP模式,新增WeeklyItemPresenter
@@ -52,46 +46,26 @@ public class WeeklyItemPresenter implements WeeklyConstract.Presenter{  //修改
         new Thread(new Runnable() {
             @Override
             public void run () {
-                String url = null;
+                String title = null;
                 switch (mType){
                     case TYPE_ANDROID:
-                        url = "https://www.cnblogs.com/cate/android/";break;
+                        title = "安卓测试";break;
                     case TYPE_IOS:
-                        url = "https://www.cnblogs.com/cate/ios/";break;
+                        title = "苹果测试";break;
                     case TYPE_SERVICE:
-                        url = "https://www.cnblogs.com/cate/mysql/";break;
+                        title = "后台测试";break;
                     case TYPE_WEB:
-                        url = "https://www.cnblogs.com/cate/web/";break;
+                        title = "网页测试";break;
                 }
-                try {
-                    Document document = Jsoup.connect(url).get();
-                    Elements elements = document.select("div.post_item");
-                    for(int i = 0;i<elements.size();i++){
-                        Element element = elements.get(i);
-                        String title = element.select("a.titlelnk").text();
-                        String contentUrl = element.select("a.titlelnk").attr("href");
-                        String time = element.select("div.post_item_foot").get(0).ownText();
-                        String username = element.select("a.lightblue").text();
-                        Elements avatarElement = element.select("p.post_item_summary").select("img");
-                        String avatarurl = null;
-                        if(avatarElement.size()>0){
-                            avatarurl = avatarElement.attr("src");
-                        }
-                        String tempcount = element.select("span.article_view").select("a.gray").text();
-                        String viewercount = tempcount.substring(3,tempcount.length()-1);
-                        tempcount = element.select("span.article_comment").select("a.gray").text();
-                        String commentcount = tempcount.substring(3,tempcount.length()-1);
-                        WeeklyBean weeklyBean = new WeeklyBean(title,time,username,avatarurl,viewercount,commentcount,contentUrl,mType);
-                        mWeeklyBeanList.add(weeklyBean);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                for(int i = 0;i<15;i++){    //加载15条测试数据,后改网络请求判断
+                    WeeklyBean weeklyBean = new WeeklyBean(title,"2月13日"
+                            ,"用户测试","...png",299,399,"http://....",mType);
+                    //后改网络请求获取该信息
+                    mWeeklyBeanList.add(weeklyBean);
                 }
                 dataHandle.sendEmptyMessage(RESPONSE_OK);
             }
         }).start();
-    }
-    private void requestFromServer(String url){
 
     }
 }

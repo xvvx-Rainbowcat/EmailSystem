@@ -9,8 +9,9 @@ public class UserBean {
     private String mEmail;
     private String mSpecialtyClass;
     private String mSignature;
+    private String mSex;
 
-    public UserBean(String name, String avaterUrl, String grade, String group,
+    public UserBean(String name, String avaterUrl, String grade, String group, String sex,
                     String telephone, String email, String specialtyClass, String signature) {
         mName = name;
         mAvaterUrl = avaterUrl;
@@ -20,6 +21,11 @@ public class UserBean {
         mEmail = email;
         mSpecialtyClass = specialtyClass;
         mSignature = signature;
+        mSex = sex;
+    }
+
+    public String getSex() {
+        return mSex;
     }
 
     public String getName() {

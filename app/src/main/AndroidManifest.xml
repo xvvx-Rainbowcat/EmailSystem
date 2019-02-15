@@ -18,10 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.WeeklyActivity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.WeeklyActivity" />
 
         <service
             android:name=".service.MyService"
@@ -29,7 +26,8 @@
             android:exported="true" />
 
         <activity android:name=".ui.WeeklyDetilActivity" />
-        <activity android:name=".ui.UserDetilActivity"></activity>
+        <activity android:name=".ui.UserDetilActivity" />
+        <activity android:name=".ui.EditUserActivity"></activity>
     </application>
 
 </manifest>

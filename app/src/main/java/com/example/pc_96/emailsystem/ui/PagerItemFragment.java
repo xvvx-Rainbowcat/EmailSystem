@@ -40,12 +40,12 @@ public class PagerItemFragment extends Fragment implements WeeklyConstract.View 
         WeeklyAdapter.OnItemClickListener clickListener = (position) -> {
             WeeklyBean bean = mWeeklyBeanList.get(position);
             Intent intent = new Intent(getContext(), WeeklyDetilActivity.class);
-            intent.putExtra("contentUrl", bean.mContentUrl);  //将文章真实地址传递给详细界面
+            intent.putExtra("data", bean.mContentUrl);  //将文章真实地址传递给详细界面
             startActivity(intent);
         };
         mAdapter = new WeeklyAdapter(getContext(), R.layout.weekly_recycler_item, mWeeklyBeanList, clickListener);
         recyclerView.setAdapter(mAdapter);
-        mPresenter = new WeeklyItemPresenter(this,mType);
+        mPresenter = new WeeklyItemPresenter(this, mType);
         mPresenter.getServerResponse();
     }
 

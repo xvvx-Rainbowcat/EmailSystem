@@ -1,11 +1,17 @@
 package com.example.pc_96.emailsystem.presenter.constract;
 
+import com.example.pc_96.emailsystem.data.UserBean;
+
 public interface UserDetilConstract {
     interface View {
-        void showMessage();
+        void showMessage(UserBean userBean);
     }
 
     interface Presenter {
-        void getMessage();
+        UserBean getMessage();
+        void showMessage(UserBean userBean);
+        void call(String telephone);
+        void sendEmail(String emailAddress);
+        void editUser();
     }
 }

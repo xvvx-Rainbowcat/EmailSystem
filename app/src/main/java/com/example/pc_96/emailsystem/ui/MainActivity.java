@@ -1,10 +1,8 @@
 package com.example.pc_96.emailsystem.ui;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pc_96.emailsystem.R;
