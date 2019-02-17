@@ -1,19 +1,19 @@
 package com.example.pc_96.emailsystem.data;
 
-public class WeeklyBean {   //修改WeeklyMessage为WeeklyBean,由于之后可能还会有更多的数据类所以总称为Bean最好(最少我是这样觉得的)
+public class WeeklyBean {   //2.14 2:35 修改mViewerCount和mCommentCount为String类型
     public String mTitle;
     public String mTime;
     public String mUserName;
     public String mAvatarUrl;
-    public int mViewerCount;
-    public int mCommentCount;
+    public String mViewerCount;
+    public String mCommentCount;
     public String mContentUrl;
     public int mType;
 
 
 
     public WeeklyBean (String mTitle, String mTime, String mUserName, String mAvatarUrl
-            , int mViewerCount, int mCommentCount, String mContentUrl, int mType) {
+            , String mViewerCount, String mCommentCount, String mContentUrl, int mType) {
         this.mTitle = mTitle;
         this.mTime = mTime;
         this.mUserName = mUserName;
@@ -40,11 +40,11 @@ public class WeeklyBean {   //修改WeeklyMessage为WeeklyBean,由于之后可�
         return mAvatarUrl;
     }
 
-    public int getmViewerCount () {
+    public String getmViewerCount () {
         return mViewerCount;
     }
 
-    public int getmCommentCount () {
+    public String getmCommentCount () {
         return mCommentCount;
     }
 

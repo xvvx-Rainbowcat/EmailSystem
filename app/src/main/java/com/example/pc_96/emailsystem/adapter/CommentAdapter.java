@@ -9,21 +9,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.pc_96.emailsystem.R;
-import com.example.pc_96.emailsystem.data.Comment;
+import com.example.pc_96.emailsystem.data.CommentBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     
-    private List<Comment> mData;
+    private ArrayList<CommentBean> mCommentBeanList;
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public CommentAdapter(List<Comment> data, Context context) {
-        mData = data;
+    public CommentAdapter(ArrayList<CommentBean> mCommentBeanList, Context context) {
+        mCommentBeanList = mCommentBeanList;
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
+    }
+
+    public void onDataChange(ArrayList mCommentBeanList){   //2.14 3:46 新增方法用于获取从网络获取的内容
+        this.mCommentBeanList = mCommentBeanList;
     }
 
     @NonNull
@@ -35,12 +41,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.onBindView();
+        viewHolder.onBindView(mContext,mCommentBeanList.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        if(mCommentBeanList == null){
+            return 0;
+        }else {
+            return mCommentBeanList.size();
+        }
     }
     
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,12 +61,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             avater = itemView.findViewById(R.id.commenter_avatar);
-            author = itemView.findViewById(R.id.commenter_name);
+            author = itemView.findViewById(R.id.comment_author);
             content = itemView.findViewById(R.id.comment_content);
-            time = itemView.findViewById(R.id.publish_time);
+            time = itemView.findViewById(R.id.comment_time);
         }
 
-        public void onBindView() {
+        public void onBindView(Context context,CommentBean commentBean) {
+            Glide.with(context).load(commentBean.mAvatarUrl).into(avater);
+            author.setText(commentBean.mAuthorName);
+            content.setText(commentBean.mContent);
+            time.setText(commentBean.mTime);
         }
     }
 }

@@ -3,6 +3,8 @@ package com.example.pc_96.emailsystem.data.source;
 import com.example.pc_96.emailsystem.data.source.local.LocalDataSource;
 import com.example.pc_96.emailsystem.data.source.remote.RemoteDataSource;
 
+import io.reactivex.Observable;
+
 /**
  * 该类为mvp中的model
  * @author YJH
@@ -25,8 +27,13 @@ public class Respository implements DataSource{
     }
 
     @Override
-    public void getWeeklyList() {
+    public Observable getWeeklyList(int type) {
+        return mRemoteDataSource.getWeeklyList(type);
+    }
 
+    @Override
+    public Observable getWeeklyDetil() {
+        return mRemoteDataSource.getWeeklyDetil();
     }
 
     @Override

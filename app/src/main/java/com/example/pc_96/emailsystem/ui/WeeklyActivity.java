@@ -59,7 +59,7 @@ public class WeeklyActivity extends AppCompatActivity
         for (int i = TYPE_ANDROID; i <= TYPE_WEB; i++) {
             PagerItemFragment tempFragment = new PagerItemFragment();
             fragmentList.add(tempFragment);
-            tempFragment.bindType(i);   //创建碎片后绑定类别
+            tempFragment.bindType(i);
         }
         WeeklyPagerAdapter adapter = new WeeklyPagerAdapter(getSupportFragmentManager(), fragmentList);
         mPager.setAdapter(adapter);
